@@ -38,9 +38,12 @@ def run_knowledge_summary(concept):
     max_retries = 3
     retry_delay = 2  # 重试间隔（秒）
     
+    # 设置请求超时
+    timeout = 240  # 4分钟超时
+    
     for attempt in range(max_retries):
         try:
-            response = requests.post(url, headers=headers, json=data)
+            response = requests.post(url, headers=headers, json=data, timeout=timeout)
             response.raise_for_status()
             
             result = response.json()
